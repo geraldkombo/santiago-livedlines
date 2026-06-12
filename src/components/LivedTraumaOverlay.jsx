@@ -1,7 +1,15 @@
 import React from 'react';
-import { Shield, UploadCloud, Paintbrush, RefreshCw, Undo2, Trash2 } from 'lucide-react';
+import { Shield, UploadCloud, Paintbrush, RefreshCw, Undo2, Trash2, Download } from 'lucide-react';
+import { generateAuditExport } from '../utils/exportUtils';
+import { getFromLedger } from './LocalLedger';
 
 const LivedTraumaOverlay = ({ isPainting, togglePainting, onUndo, onClear, handleFileUpload, location, setLocation }) => {
+  const handleExport = () => {
+    const strokes = getFromLedger('trauma_strokes') || [];
+    const ledger = getFromLedger('santiago_ledger') || {};
+    generateAuditExport(strokes, ledger);
+  };
+
   return (
     <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
       <div className="bg-slate-900 bg-opacity-90 backdrop-blur border border-slate-700 p-4 rounded-lg shadow-2xl w-56">
@@ -52,6 +60,13 @@ const LivedTraumaOverlay = ({ isPainting, togglePainting, onUndo, onClear, handl
               <input type="file" accept=".geojson,.json" onChange={handleFileUpload} className="hidden" />
             </label>
           </div>
+
+          <button
+            onClick={handleExport}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white transition-colors w-full"
+          >
+            <Download className="w-3.5 h-3.5" /> Export GeoJSON Audit
+          </button>
         </div>
       </div>
     </div>
