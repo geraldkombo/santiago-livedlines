@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import MapViewer from './components/MapViewer';
 import LocalLedger from './components/LocalLedger';
+import CollectionForm from './components/CollectionForm';
 import { generateGeospatialData, calculateLVS } from './utils/spatialEngine';
 import { Recycle, BarChart3, Sliders } from 'lucide-react';
 import * as turf from '@turf/turf';
 import L from 'leaflet';
+import db from './db/picketDb';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -24,6 +26,8 @@ const App = () => {
   const [price, setPrice] = useState(41);
   const [ward, setWard] = useState('mathare');
   const [stats, setStats] = useState({ zone1: 0, zone2: 0, safe: 0, totalValue: 0, totalPoints: 0 });
+  const [placingCollection, setPlacingCollection] = useState(false);
+  const [pendingCoords, setPendingCoords] = useState(null);
 
   useEffect(() => {
     const data = generateGeospatialData(ward);
@@ -78,6 +82,21 @@ const App = () => {
     });
 
     setSpatialData(prev => ({ ...prev, buildings: updatedBuildings }));
+  };
+
+  const handlePlaceRequest = () => {
+    setPendingCoords(null);
+    setPlacingCollection(true);
+  };
+
+  const handleCollectionCoords = (coords) => {
+    setPendingCoords(coords);
+    setPlacingCollection(false);
+  };
+
+  const handleCollectionSave = async (feature) => {
+    await db.features.add(feature);
+    setPendingCoords(null);
   };
 
   return (
@@ -144,6 +163,13 @@ const App = () => {
           </div>
         </div>
 
+        <CollectionForm
+          placing={placingCollection}
+          onPlaceRequest={handlePlaceRequest}
+          pendingCoords={pendingCoords}
+          onSave={handleCollectionSave}
+        />
+
         <LocalLedger buffer60={spatialData?.buffer60} />
       </div>
 
@@ -154,6 +180,8 @@ const App = () => {
           wardLabel={WARD_LABELS[ward]}
           cycleWard={cycleWard}
           handleFileUpload={handleFileUpload}
+          placingCollection={placingCollection}
+          onCollectionCoords={handleCollectionCoords}
         />
       </div>
     </div>

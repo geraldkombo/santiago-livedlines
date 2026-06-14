@@ -1,17 +1,31 @@
-import { useState, useEffect } from 'react';
-import { saveToLedger, getFromLedger } from '../components/LocalLedger';
+import { useState } from 'react';
+import { useLiveQuery } from 'dexie-react-hooks';
+import db from '../db/picketDb';
 
 export const useTraumaBrush = () => {
-  const [strokes, setStrokes] = useState(() => getFromLedger('picket_hazards') || []);
   const [isPainting, setIsPainting] = useState(false);
 
-  useEffect(() => {
-    saveToLedger('picket_hazards', strokes);
-  }, [strokes]);
+  const strokes = useLiveQuery(() => db.features.toArray()) || [];
 
-  const addStroke = (geoJson) => setStrokes(prev => [...prev, geoJson]);
-  const undoStroke = () => setStrokes(prev => prev.slice(0, -1));
-  const clearStrokes = () => setStrokes([]);
+  const addStroke = async (geoJson) => {
+    await db.features.add({
+      type: 'Feature',
+      geometry: geoJson.geometry,
+      properties: {
+        ...geoJson.properties,
+        timestamp: geoJson.properties?.timestamp || Date.now()
+      }
+    });
+  };
+
+  const undoStroke = async () => {
+    const last = await db.features.orderBy('id').last();
+    if (last) await db.features.delete(last.id);
+  };
+
+  const clearStrokes = async () => {
+    await db.features.clear();
+  };
 
   return { strokes, isPainting, setIsPainting, addStroke, undoStroke, clearStrokes };
 };

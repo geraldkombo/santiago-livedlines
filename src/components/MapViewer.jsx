@@ -27,7 +27,17 @@ const PaintBrush = ({ isPainting, addStroke }) => {
   return null;
 };
 
-const MapViewer = ({ spatialData, ward, wardLabel, cycleWard, handleFileUpload }) => {
+const CollectionClickCatcher = ({ active, onCoords }) => {
+  useMapEvents({
+    click(e) {
+      if (!active) return;
+      onCoords({ lng: e.latlng.lng, lat: e.latlng.lat });
+    }
+  });
+  return null;
+};
+
+const MapViewer = ({ spatialData, ward, wardLabel, cycleWard, handleFileUpload, placingCollection, onCollectionCoords }) => {
   const { strokes, isPainting, setIsPainting, addStroke, undoStroke, clearStrokes } = useTraumaBrush();
 
   if (!spatialData) {
@@ -75,7 +85,7 @@ const MapViewer = ({ spatialData, ward, wardLabel, cycleWard, handleFileUpload }
         cycleWard={cycleWard}
       />
 
-      <MapContainer center={mapCenter} zoom={15} className="h-full w-full relative z-0" style={{ cursor: isPainting ? 'crosshair' : 'default' }}>
+      <MapContainer center={mapCenter} zoom={15} className="h-full w-full relative z-0" style={{ cursor: isPainting || placingCollection ? 'crosshair' : 'default' }} preferCanvas={true}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
@@ -118,13 +128,15 @@ const MapViewer = ({ spatialData, ward, wardLabel, cycleWard, handleFileUpload }
                 color: '#7e22ce',
                 weight: 2,
                 opacity: 1,
-                fillOpacity: 0.7
+                fillOpacity: 0.7,
+                renderer: L.canvas()
               });
             }}
           />
         )}
 
         <PaintBrush isPainting={isPainting} addStroke={addStroke} />
+        <CollectionClickCatcher active={placingCollection} onCoords={onCollectionCoords} />
       </MapContainer>
     </div>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Shield, UploadCloud, Paintbrush, RefreshCw, Undo2, Trash2, Download } from 'lucide-react';
 import { generateAuditExport } from '../utils/exportUtils';
-import { getFromLedger } from './LocalLedger';
+import db from '../db/picketDb';
 
 const PICKetOverlay = ({ isPainting, togglePainting, onUndo, onClear, handleFileUpload, ward, wardLabel, cycleWard }) => {
-  const handleExport = () => {
-    const strokes = getFromLedger('picket_hazards') || [];
-    const ledger = getFromLedger('picket_ledger') || {};
+  const handleExport = async () => {
+    const strokes = await db.features.toArray();
+    const ledger = await db.visits.toArray();
     generateAuditExport(strokes, ledger);
   };
 
@@ -56,7 +56,7 @@ const PICKetOverlay = ({ isPainting, togglePainting, onUndo, onClear, handleFile
           <div className="border border-dashed border-slate-700 rounded p-3 text-center transition hover:bg-slate-800">
             <label className="cursor-pointer flex flex-col items-center justify-center gap-1.5 text-[11px] text-slate-300 font-medium">
               <UploadCloud className="w-5 h-5 text-emerald-400" />
-              <span>Upload Collection Data</span>
+              <span>Upload GeoJSON (Collection Data)</span>
               <input type="file" accept=".geojson,.json" onChange={handleFileUpload} className="hidden" />
             </label>
           </div>

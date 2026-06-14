@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as turf from '@turf/turf';
 import { MapPin, CheckCircle, AlertTriangle } from 'lucide-react';
+import { useLiveQuery } from 'dexie-react-hooks';
+import db from '../db/picketDb';
 
 export const saveToLedger = (key, data) => {
   try {
@@ -21,20 +23,11 @@ export const getFromLedger = (key) => {
 };
 
 const LocalLedger = ({ buffer60 }) => {
-  const [ledger, setLedger] = useState([]);
   const [status, setStatus] = useState('');
 
-  useEffect(() => {
-    const stored = getFromLedger('picket_ledger');
-    if (stored) setLedger(stored);
-  }, []);
+  const ledger = useLiveQuery(() => db.visits.orderBy('id').reverse().toArray()) || [];
 
-  const saveLedger = (newLedger) => {
-    setLedger(newLedger);
-    saveToLedger('picket_ledger', newLedger);
-  };
-
-  const verifyLocation = () => {
+  const verifyLocation = async () => {
     if (!navigator.geolocation) {
       setStatus('GPS hardware unavailable.');
       return;
@@ -42,20 +35,20 @@ const LocalLedger = ({ buffer60 }) => {
 
     setStatus('Acquiring GPS...');
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const { latitude, longitude } = position.coords;
         const pt = turf.point([longitude, latitude]);
 
         const isVerified = buffer60 ? turf.booleanPointInPolygon(pt, buffer60) : false;
 
         const record = {
-          id: 'PICKET-' + Math.floor(10000 + Math.random() * 90000),
+          visitId: 'PICKET-' + Math.floor(10000 + Math.random() * 90000),
           coords: [latitude.toFixed(5), longitude.toFixed(5)],
           timestamp: new Date().toISOString(),
           verified: isVerified
         };
 
-        saveLedger([record, ...ledger]);
+        await db.visits.add(record);
         setStatus(isVerified ? 'Site visit verified.' : 'Location outside dumpsite buffer.');
       },
       (error) => {
@@ -68,7 +61,7 @@ const LocalLedger = ({ buffer60 }) => {
   return (
     <div className="bg-slate-800 border border-slate-700 p-4 rounded-lg flex flex-col gap-3">
       <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-        <MapPin className="w-4 h-4 text-emerald-400" /> Collection Route Ledger
+        <MapPin className="w-4 h-4 text-emerald-400" /> Baze Route Ledger
       </h3>
       <button
         onClick={verifyLocation}
@@ -82,10 +75,10 @@ const LocalLedger = ({ buffer60 }) => {
         {ledger.length === 0 && (
           <p className="text-xs text-slate-500 text-center py-2">No visits logged.</p>
         )}
-        {ledger.map((task, idx) => (
-          <div key={idx} className="text-[11px] border-b border-slate-800 py-2 last:border-0">
+        {ledger.map((task) => (
+          <div key={task.id} className="text-[11px] border-b border-slate-800 py-2 last:border-0">
             <div className="flex justify-between items-center mb-1">
-              <span className="font-mono text-emerald-400 font-bold">{task.id}</span>
+              <span className="font-mono text-emerald-400 font-bold">{task.visitId}</span>
               <span className="flex items-center gap-1 text-[10px]">
                 {task.verified ? (
                   <span className="text-emerald-500 flex items-center gap-0.5"><CheckCircle className="w-3 h-3" /> Verified</span>
