@@ -111,7 +111,7 @@ git push origin master
 | Peter Maina | nj.peter.maina@gmail.com | Project Mocha |
 | Gisore Nyabuti | gisorenyabuti@gmail.com | Spatial Data |
 | Shadrack Otieno | shadrackmeshack7@gmail.com | Community Engagement |
-| James Murithi | jamespmurithi@gmail.com | Policy & Advocacy |
+| James Murithi | jamespmurithi@gmail.com | |
 
 Built for the **Innovation for Cities** program — a collaboration between Nairobi's waste picker cooperatives, urban tech builders, and policy advocates.
 
