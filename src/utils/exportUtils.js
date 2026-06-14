@@ -19,7 +19,7 @@ export const generateAuditExport = (strokes, visits) => {
       ward_boundary: s.properties?.ward || '',
       epr_statutory_category: EPR_CATEGORIES[1],
       material_sub_type: s.properties?.materialType || 'mixed',
-      container_volume_type: s.properties?.container || 'gunia',
+      container_volume_type: s.properties?.container || 'sack',
       fullness_percentage: s.properties?.fullness || 100,
       estimated_weight_kg: s.properties?.estimatedWeight || 0,
       hazard_incident: s.properties?.type === 'hazard_mark',

@@ -15,15 +15,25 @@ Using Sheng (Nairobi street slang) in the interface makes the tool feel like it 
 | Term | Meaning | Used In |
 |------|---------|---------|
 | **Baze** | Basecamp, gathering space, cooperative meeting point | Baze Route Ledger |
-| **Mkokoteni** | Manual pushcart (standard: 1.5 m³ volume) | Collection Form container selector |
-| **Gunia** | Standard 100-liter agricultural sack | Collection Form container selector |
-| **Kanjo** | County enforcement officers | Hazard tagging incident type |
-| **Chupa** | Bottles (both plastic and glass) | Material selector labels |
-| **Katoni** | Cardboard / paper packaging | Material selector labels |
-| **Karatasi** | Mixed paper | Material selector labels |
-| **Mkebe** | Metal cans (aluminum/tin) | Material selector labels |
-| **Chuma** | Steel / scrap metal | Material selector labels |
-| **Chirambe** | Organic food waste | Material selector labels |
+| **Cart** | Manual pushcart (standard: 1.5 m³ volume) | Collection Form container selector |
+
+| **Sack** | Standard 100-liter agricultural sack | Collection Form container selector |
+
+| **PET Plastics** | Bottles (clear plastic) | Material selector |
+
+| **HDPE Plastics** | Bottles (opaque plastic) | Material selector |
+
+| **Cardboard** | Cardboard / paper packaging | Material selector |
+
+| **Mixed Paper** | Mixed paper | Material selector |
+
+| **Aluminum Cans** | Metal cans (aluminum) | Material selector |
+
+| **Steel** | Steel / scrap metal | Material selector |
+
+| **Glass** | Bottles (glass) | Material selector |
+
+| **Organic** | Organic food waste | Material selector |
 | **Nyarere** | Rubber / tyres | Future material category |
 
 ---
@@ -37,17 +47,17 @@ Using Sheng (Nairobi street slang) in the interface makes the tool feel like it 
 2. Select a ward (Mathare → Dandora → Kibera → Kawangware)
 3. Scroll to "Log Collection" section
 4. Select material type:
-   → Chupa (PET Plastics)
-   → Chupa (HDPE Plastics)
-   → Katoni (Cardboard)
-   → Karatasi (Mixed Paper)
-   → Mkebe (Aluminum Cans)
-   → Chuma (Steel)
-   → Chupa (Glass)
-   → Chirambe (Organic)
+    → PET Plastics
+    → HDPE Plastics
+    → Cardboard
+    → Mixed Paper
+    → Aluminum Cans
+    → Steel
+    → Glass
+    → Organic
 5. Select container:
-   → Gunia (100L sack) — for small/medium loads carried on back
-   → Mkokoteni (1.5m³ cart) — for full pushcart loads
+    → Sack (100L) — for small/medium loads carried on back
+    → Cart (1.5m³) — for full pushcart loads
 6. Set fullness (25% / 50% / 75% / 100%)
    → Estimate how full the container is visually
 7. View estimated weight — updates live as you change material/container/fullness

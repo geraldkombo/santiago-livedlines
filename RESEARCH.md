@@ -9,7 +9,7 @@ This project is grounded in ongoing organizing around the Sustainable Waste Mana
 | Finding | Evidence from Chat | Design Response |
 |---------|-------------------|-----------------|
 | **EPR pricing set without pickers** | PROs determining prices per kg without picker representation; pickers discovering rates after decisions made | Collection Pricing slider (KES 5–100/kg) lets pickers model their own price scenarios; GeoJSON export provides counter-data for negotiation |
-| **The Ghana formula problem** | NEMA using a 41 kg/day formula from Ghana that doesn't match Kenyan waste composition or collection patterns | Heuristics engine with Kenyan-specific material densities and local container volumes (Gunia, Mkokoteni) |
+| **The Ghana formula problem** | NEMA using a 41 kg/day formula from Ghana that doesn't match Kenyan waste composition or collection patterns | Heuristics engine with Kenyan-specific material densities and local container volumes (Sack, Cart) |
 | **Dandora dumpsite politics** | Organizing around dumpsite closure threats, relocation without alternatives, cartel control of incoming waste trucks | 4-ward system including Dandora with dumpsite boundary mapping; hazard tagging for cartel activity |
 | **"Chokora" stigma** | Pervasive societal stigma that blocks formal recognition, contracts, insurance, minimum wage | The entire EPR Evidence Pack export is designed as a formalization tool — GPS-stamped data counters stigma with evidence |
 | **Harassment by Kanjo & cartels** | County enforcement officers and private cartels blocking access, demanding bribes, confiscating materials | Hazard/incident tagging with discreet photo evidence capture; data stays on-device until cooperative chooses to export |
@@ -112,7 +112,7 @@ Waste Record directly addresses this gap by providing a standardized, offline, G
 
 **Source:** US EPA and global solid waste management bulk density standards, adapted for loose/uncompacted materials typical of informal manual collection.
 
-| Material | Density (kg/m³) | 100L Gunia (kg) | 1.5m³ Mkokoteni (kg) |
+| Material | Density (kg/m³) | 100L Sack (kg) | 1.5m³ Cart (kg) |
 |----------|----------------|-----------------|----------------------|
 | PET Plastics | 21 | 2.1 | 31.5 |
 | HDPE Plastics | 14 | 1.4 | 21.0 |

@@ -15,7 +15,7 @@ Offline-first collection logging app for waste picker cooperatives in Kenya. Log
 - **IndexedDB persistence** — crash-proof data layer for features, site visits, and photo evidence
 - **Dumpsite proximity mapping** — 30m (Hot Zone) and 60m (Buffer) zones around dumpsite boundaries
 - **4-ward support** — cycle through Mathare, Dandora, Kibera, Kawangware with synthetic collection point data
-- **Collection logging** — log material type (8 categories), container (Mkokoteni/Gunia), fullness, with live estimated kg
+- **Collection logging** — log material type (8 categories), container (Cart/Sack), fullness, with live estimated kg
 - **Photo evidence** — native camera capture with pica client-side compression (~150 KB JPEG), stored in IndexedDB
 - **Hazard/incident tagging** — click to mark health incidents, harassment, unfair pricing directly on the map
 - **Collection Pricing tool** — adjust price per kg (KES 5–100) and see daily affected value per ward
@@ -61,7 +61,7 @@ npm run build
 1. Open the app — a dark-themed side panel shows **Dumpsite Proximity** stats for the current ward
 2. Click the ward button in the Field Toolkit to cycle wards (Mathare → Dandora → Kibera → Kawangware)
 3. Adjust the **Price per kg** slider to see total daily value for affected collection points
-4. **Log a collection**: select material type (Katoni, Chupa, Chuma, etc.), container (Gunia/Mkokoteni), fullness %, tap **Place on Map**, then click the desired location on the map
+4. **Log a collection**: select material type, container (Sack/Cart), fullness %, tap **Place on Map**, then click the desired location on the map
 5. **Add photo evidence**: tap **Capture Photo Evidence** to take a photo — it's compressed on-device and attached to the collection point
 6. **Tag hazards**: click **Tag Hazard / Incident**, then click any map location to mark an incident
 7. **Log a site visit**: click **Log Site Visit** to capture your GPS coordinates and verify you're within the dumpsite buffer

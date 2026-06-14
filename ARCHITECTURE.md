@@ -136,7 +136,7 @@ App
 │   ├── Collection Pricing slider
 │   ├── CollectionForm
 │   │   ├── Material select (8 types)
-│   │   ├── Container select (Gunia/Mkokoteni)
+│   │   ├── Container select (Sack/Cart)
 │   │   ├── Fullness slider (25-100%)
 │   │   ├── Live estimated weight display
 │   │   ├── Camera capture (pica compression)
