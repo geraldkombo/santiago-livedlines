@@ -6,7 +6,7 @@ Offline-first collection logging app for waste picker cooperatives in Kenya. Log
 > - [Research Foundation](RESEARCH.md) - WhatsApp analysis, global precedents, legal framework, density heuristics
 > - [Architecture](ARCHITECTURE.md) - Zero-server design, IndexedDB, Canvas renderer, PWA decisions
 > - [EPR GeoJSON Schema](EPR-SCHEMA.md) - NEMA-aligned export schema, field reference, legal basis
-> - [Field Guide](FIELD-GUIDE.md) - Sheng glossary, collection workflows, offline usage, device requirements
+> - [Field Guide](FIELD-GUIDE.md) - Collection workflows, offline usage, device requirements
 > - [Team](TEAM.md) - Team bios, roles, domain expertise, contact
 
 ## Features
