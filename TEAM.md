@@ -33,7 +33,7 @@ Building an offline-first waste picker spatial organizing toolkit for Nairobi's 
 - Contribution to Waste Record: Ensured spatial data rigor (coordinate precision, buffer accuracy, GeoJSON validity), guided the EPR schema alignment with NEMA-compatible formats
 
 ### Shadrack Otieno
-**Community Engagement Lead**
+**Community Engagement & Developer**
 
 - Email: shadrackmeshack7@gmail.com
 - Role: Community liaison, participatory design, field testing

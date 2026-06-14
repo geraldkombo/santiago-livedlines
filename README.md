@@ -109,8 +109,8 @@ git push origin master
 |------|-------|------|
 | Gerald Kombo | geraldshikunyi@gmail.com | Lead Developer |
 | Peter Maina | nj.peter.maina@gmail.com | Project Mocha |
-| Gisore Nyabuti | gisorenyabuti@gmail.com | Chairman, KNWPWA |
-| Shadrack Otieno | shadrackmeshack7@gmail.com | Community Engagement |
+| Gisore Nyabuti | gisorenyabuti@gmail.com | Chairman, Kenya National Waste Pickers Welfare Association |
+| Shadrack Otieno | shadrackmeshack7@gmail.com | Community Engagement & Developer |
 | James Murithi | jamespmurithi@gmail.com | |
 
 Built for the **Innovation for Cities** program — a collaboration between Nairobi's waste picker cooperatives, urban tech builders, and policy advocates.
