@@ -69,7 +69,7 @@
 
 | Incident Type | Example | Why Tag It |
 |---------------|---------|------------|
-| **Harassment** | Kanjo demanding bribes, cartel blocking access | Builds case for safe passage agreements |
+| **Harassment** | County enforcement officers demanding bribes, cartel blocking access | Builds case for safe passage agreements |
 | **Health hazard** | Toxic smoke, medical waste, chemical spills | Documents occupational health risks for advocacy |
 | **Unfair pricing** | Aggregator offering below-market rate | Creates spatial price map for negotiation |
 | **Burn site** | Open burning of synthetic materials | Maps pollution hotspots for environmental action |
