@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 
-const db = new Dexie('PICKetDatabase');
+const db = new Dexie('PIMADatabase');
 
 db.version(1).stores({
   features: '++id, type, timestamp, ward',

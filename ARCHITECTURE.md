@@ -131,7 +131,7 @@ useLiveQuery(() => db.features.toArray()) → FeatureCollection → GeoJSON → 
 ```
 App
 ├── Side Panel (w-[420px])
-│   ├── Header (PICKet branding)
+│   ├── Header (PIMA branding)
 │   ├── Dumpsite Proximity stats
 │   ├── Collection Pricing slider
 │   ├── CollectionForm
@@ -150,7 +150,7 @@ App
 │       └── Recent visits list
 └── Map (flex-1)
     └── MapViewer
-        ├── PICKetOverlay (floating toolbar)
+        ├── PIMAOverlay (floating toolbar)
         │   ├── Ward toggle
         │   ├── Tag Hazard/Incident
         │   ├── Undo / Clear

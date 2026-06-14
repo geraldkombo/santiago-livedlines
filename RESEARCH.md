@@ -63,7 +63,7 @@ The regulations require PROs to execute physical take-back of post-consumer mate
 - **The 41 kg/day "Ghana formula"** is used by NEMA as a proxy, despite Kenyan waste composition being different
 - **Without data, pickers cannot negotiate inclusion in EPR fee distribution**
 
-PICKet directly addresses this gap by providing a standardized, offline, GPS-stamped data collection and export mechanism that produces NEMA-legible audit trails.
+PIMA directly addresses this gap by providing a standardized, offline, GPS-stamped data collection and export mechanism that produces NEMA-legible audit trails.
 
 ---
 
@@ -73,13 +73,13 @@ PICKet directly addresses this gap by providing a standardized, offline, GPS-sta
 
 **Model:** Picker-owned social enterprise with formal municipal contract
 **Key takeaway:** Data is leverage. SWaCH's 25+ year track record of verifiable collection data enabled them to negotiate a formal service agreement with the Pune Municipal Corporation.
-**Applied in PICKet:** The City Dashboard and standardized GeoJSON schema are designed to produce the same kind of auditable collection record that SWaCH uses for municipal contracting.
+**Applied in PIMA:** The City Dashboard and standardized GeoJSON schema are designed to produce the same kind of auditable collection record that SWaCH uses for municipal contracting.
 
 ### African Reclaimers Organisation (South Africa)
 
 **Model:** Informal reclaimers organized as a collective bargaining unit
 **Key takeaway:** Data on tonnages collected and environmental value created enabled reclaimers to negotiate integration into South Africa's PRO framework.
-**Applied in PICKet:** The `estimated_weight_kg` field in every exported Feature, combined with the `epr_statutory_category`, directly mirrors the data points South African reclaimers used to prove their contribution.
+**Applied in PIMA:** The `estimated_weight_kg` field in every exported Feature, combined with the `epr_statutory_category`, directly mirrors the data points South African reclaimers used to prove their contribution.
 
 ### WIEGO (Women in Informal Employment: Globalizing and Organizing)
 
@@ -88,7 +88,7 @@ PICKet directly addresses this gap by providing a standardized, offline, GPS-sta
 - Technology should not create new surveillance risks
 - Data collection must be grounded in informed consent
 
-**Applied in PICKet:**
+**Applied in PIMA:**
 - **Zero-server architecture** — data never leaves the device until explicit export
 - **No telemetry, no analytics, no cloud** — the cooperative is the sole data custodian
 - **Visual consent prompts** before any export is generated
@@ -97,7 +97,7 @@ PICKet directly addresses this gap by providing a standardized, offline, GPS-sta
 
 **Model:** Picker cooperatives with educational technology platforms
 **Key takeaway:** Technology must be accessible to semi-literate users; visual interfaces and peer training are more effective than text-heavy documentation.
-**Applied in PICKet:** Icon-based UI, photo evidence as primary documentation method, audio capture (MediaRecorder API) for voice notes.
+**Applied in PIMA:** Icon-based UI, photo evidence as primary documentation method, audio capture (MediaRecorder API) for voice notes.
 
 ### KoboToolbox / ODK / OpenMapKit
 
@@ -106,7 +106,7 @@ PICKet directly addresses this gap by providing a standardized, offline, GPS-sta
 - **Generic survey forms** — not optimized for rapid, high-frequency spatial event logging
 - **No specialized waste sector schema** — no material types, container volumes, or EPR category mapping
 
-**PICKet's differentiation:** Zero-server sovereignty + specialized picker workflow + EPR-native schema.
+**PIMA's differentiation:** Zero-server sovereignty + specialized picker workflow + EPR-native schema.
 
 ---
 
@@ -138,6 +138,6 @@ These values are conservative estimates for loose, uncompacted materials as coll
 | **Cloud backend** | Firebase, Supabase, custom server | Eliminated: requires internet, ongoing costs, data sovereignty risk |
 | **Client-server with offline sync** | KoboToolbox, ODK | Eliminated: sync dependency, data leaves cooperative control |
 | **Decentralized / IPFS** | Web3 storage | Eliminated: complexity, no clear benefit over local file for this scale |
-| **Pure client-side + file export** | **PICKet approach** | Selected: zero operational cost, full data sovereignty, works offline, GeoJSON is universal |
+| **Pure client-side + file export** | **PIMA approach** | Selected: zero operational cost, full data sovereignty, works offline, GeoJSON is universal |
 
 The key insight: **a cooperative does not need a server to prove its value to a regulator.** A GeoJSON file on a phone, opened in a county official's QGIS, is as persuasive as a cloud dashboard — and does not require the cooperative to maintain infrastructure, pay hosting fees, or trust a third party with its data.

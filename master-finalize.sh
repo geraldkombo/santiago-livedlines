@@ -1,5 +1,5 @@
 #!/bin/bash
-# PICKet — Master Finalization Protocol
+# PIMA — Master Finalization Protocol
 # Execution Time: ~3 Hours (Stress Testing + Build + Deploy)
 
 echo "--- Initializing 3-Hour Autonomous Finalization ---"

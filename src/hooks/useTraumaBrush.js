@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import db from '../db/picketDb';
+import db from '../db/pimaDb';
 
 export const useTraumaBrush = () => {
   const [isPainting, setIsPainting] = useState(false);

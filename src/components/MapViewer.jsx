@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import { useTraumaBrush } from '../hooks/useTraumaBrush';
-import PICKetOverlay from './PICKetOverlay';
+import PIMAOverlay from './PIMAOverlay';
 
 const RecenterMap = ({ center }) => {
   const map = useMap();
@@ -74,7 +74,7 @@ const MapViewer = ({ spatialData, ward, wardLabel, cycleWard, handleFileUpload, 
 
   return (
     <div className="relative h-full w-full">
-      <PICKetOverlay
+      <PIMAOverlay
         isPainting={isPainting}
         togglePainting={() => setIsPainting(!isPainting)}
         onUndo={undoStroke}

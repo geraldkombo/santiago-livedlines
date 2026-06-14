@@ -1,1 +1,1 @@
-// setupTests — Vitest environment configuration for Santiago-LivedLines
+// setupTests — Vitest environment configuration for PIMA Toolkit

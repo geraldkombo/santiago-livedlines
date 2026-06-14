@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as turf from '@turf/turf';
 import { MapPin, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import db from '../db/picketDb';
+import db from '../db/pimaDb';
 
 export const saveToLedger = (key, data) => {
   try {
@@ -42,7 +42,7 @@ const LocalLedger = ({ buffer60 }) => {
         const isVerified = buffer60 ? turf.booleanPointInPolygon(pt, buffer60) : false;
 
         const record = {
-          visitId: 'PICKET-' + Math.floor(10000 + Math.random() * 90000),
+          visitId: 'PIMA-' + Math.floor(10000 + Math.random() * 90000),
           coords: [latitude.toFixed(5), longitude.toFixed(5)],
           timestamp: new Date().toISOString(),
           verified: isVerified

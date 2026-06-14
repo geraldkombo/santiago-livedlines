@@ -8,7 +8,7 @@ Kenya's **Sustainable Waste Management Act (2022)** and the **Sustainable Waste 
 2. **Monthly Volume Declarations (MVDs)** tracking tonnages introduced to market
 3. **5 statutory categories** of Producer Responsibility Organizations
 
-PICKet's GeoJSON export schema is designed to produce data that is immediately legible within this regulatory framework, enabling waste picker cooperatives to present verifiable collection evidence to PROs, NEMA, and county environmental officers.
+PIMA's GeoJSON export schema is designed to produce data that is immediately legible within this regulatory framework, enabling waste picker cooperatives to present verifiable collection evidence to PROs, NEMA, and county environmental officers.
 
 ---
 
@@ -21,8 +21,8 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
   "type": "FeatureCollection",
   "metadata": {
     "exportedAt": "2026-06-14T18:37:07.000Z",
-    "source": "picket",
-    "toolkit": "Waste Picker Spatial Organizing Toolkit",
+    "source": "pima",
+    "toolkit": "PIMA — Waste Picker Spatial Organizing Toolkit",
     "visitsLogged": 12,
     "hazardsTagged": 8,
     "epr_framework": "Kenya Sustainable Waste Management (EPR) Regulations 2024"
@@ -41,7 +41,7 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
     "coordinates": [36.8571, -1.2567]
   },
   "properties": {
-    "collection_id": "picket-1718383027000",
+    "collection_id": "pima-1718383027000",
     "timestamp_iso": "2026-06-14T09:42:17.000Z",
     "picker_coop_name": "Nairobi Recyclable Waste Association",
     "ward_boundary": "Mathare",
@@ -67,7 +67,7 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
     "coordinates": [36.8582, -1.2559]
   },
   "properties": {
-    "collection_id": "picket-1718383100000",
+    "collection_id": "pima-1718383100000",
     "timestamp_iso": "2026-06-14T09:45:10.000Z",
     "picker_coop_name": "Nairobi Recyclable Waste Association",
     "ward_boundary": "",
@@ -93,7 +93,7 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
     "coordinates": [36.8575, -1.2565]
   },
   "properties": {
-    "visit_id": "PICKET-47291",
+    "visit_id": "PIMA-47291",
     "timestamp_iso": "2026-06-14T10:15:00.000Z",
     "gps_verified": true,
     "feature_type": "site_visit"
@@ -110,8 +110,8 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
 | Field | Type | Description | Example |
 |-------|------|-------------|---------|
 | `exportedAt` | ISO 8601 | When the export was generated | `2026-06-14T18:37:07.000Z` |
-| `source` | string | Application identifier | `picket` |
-| `toolkit` | string | Full application name | `Waste Picker Spatial Organizing Toolkit` |
+| `source` | string | Application identifier | `pima` |
+| `toolkit` | string | Full application name | `PIMA — Waste Picker Spatial Organizing Toolkit` |
 | `visitsLogged` | integer | Count of site visit records in export | `12` |
 | `hazardsTagged` | integer | Count of hazard/incident records | `8` |
 | `epr_framework` | string | Legal framework reference | `Kenya Sustainable Waste Management (EPR) Regulations 2024` |
@@ -120,7 +120,7 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
 
 | Field | Type | Description | Values |
 |-------|------|-------------|--------|
-| `collection_id` | string | Unique identifier | `picket-{timestamp}` |
+| `collection_id` | string | Unique identifier | `pima-{timestamp}` |
 | `timestamp_iso` | ISO 8601 | When the collection was logged | `2026-06-14T09:42:17.000Z` |
 | `picker_coop_name` | string | Cooperative or picker identifier | Configurable |
 | `ward_boundary` | string | Nairobi ward name | `mathare`, `dandora`, `kibera`, `kawangware` |
@@ -137,7 +137,7 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
 
 | Field | Type | Description | Values |
 |-------|------|-------------|--------|
-| `visit_id` | string | Unique identifier | `PICKET-{random}` |
+| `visit_id` | string | Unique identifier | `PIMA-{random}` |
 | `timestamp_iso` | ISO 8601 | When the visit was logged | `2026-06-14T10:15:00.000Z` |
 | `gps_verified` | boolean | Whether coords fall within dumpsite buffer | `true`, `false` |
 | `feature_type` | string | Record type discriminator | `site_visit` |
@@ -148,7 +148,7 @@ PICKet's GeoJSON export schema is designed to produce data that is immediately l
 
 Per the First Schedule of Kenya's **Sustainable Waste Management (EPR) Regulations, 2024**:
 
-| Code | Category | Description | PICKet Materials |
+| Code | Category | Description | PIMA Materials |
 |------|----------|-------------|-----------------|
 | 1 | Non-hazardous packaging | Plastics, paper, glass, aluminum, cardboard | PET, HDPE, CARDBOARD, PAPER, ALUMINUM, STEEL, GLASS |
 | 2 | Hazardous products packaging | Industrial chemicals, hazardous materials | (Future) |
@@ -156,7 +156,7 @@ Per the First Schedule of Kenya's **Sustainable Waste Management (EPR) Regulatio
 | 4 | End-of-life motor vehicles | Vehicles, tyres | (Future) |
 | 5 | Non-packaging items | Organic waste, textiles, other | ORGANIC |
 
-Currently, PICKet defaults all material types to **Category 1** (non-hazardous packaging) since the initial target materials (plastics, paper, glass, metals, cardboard) fall under this category. Organic waste maps to Category 5. Future iterations will expand to include Categories 2–4.
+Currently, PIMA defaults all material types to **Category 1** (non-hazardous packaging) since the initial target materials (plastics, paper, glass, metals, cardboard) fall under this category. Organic waste maps to Category 5. Future iterations will expand to include Categories 2–4.
 
 ---
 

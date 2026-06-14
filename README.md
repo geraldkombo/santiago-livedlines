@@ -1,8 +1,8 @@
-# PICKet — Waste Picker Spatial Organizing Toolkit
+# PIMA — Waste Picker Spatial Organizing Toolkit
 
-**PICKet** is a 100% client-side Web GIS toolkit built for waste picker cooperatives and organizers in Kenya. It runs offline, requires no server or internet in the field, and generates GPS-stamped GeoJSON evidence packs for EPR (Extended Producer Responsibility) advocacy.
+**PIMA** (Swahili: *to measure, to assess*) is a 100% client-side Web GIS toolkit built for waste picker cooperatives and organizers in Kenya. It runs offline, requires no server or internet in the field, and generates GPS-stamped GeoJSON evidence packs for EPR (Extended Producer Responsibility) advocacy.
 
-Built by waste pickers, for waste pickers — to replace "they say" with data.
+Built by waste pickers, for waste pickers — *PIMA na ujue* — Measure and know.
 
 > **Full documentation:**
 > - [Research Foundation](RESEARCH.md) — WhatsApp transcript analysis, global precedents, legal framework, density heuristics
@@ -78,7 +78,7 @@ src/
 ├── main.jsx                         # Entry point
 ├── components/
 │   ├── MapViewer.jsx                # Leaflet map with buffer zones, collection points, hazard overlay
-│   ├── PICKetOverlay.jsx            # Floating toolbar: ward toggle, hazard brush, export
+│   ├── PIMAOverlay.jsx              # Floating toolbar: ward toggle, hazard brush, export
 │   └── LocalLedger.jsx              # GPS site-verification widget with localStorage persistence
 ├── hooks/
 │   ├── useTraumaBrush.js            # Centralized hazard-mark state with undo/clear/auto-save

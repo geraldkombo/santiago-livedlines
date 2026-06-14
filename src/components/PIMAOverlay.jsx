@@ -1,9 +1,9 @@
 import React from 'react';
 import { Shield, UploadCloud, Paintbrush, RefreshCw, Undo2, Trash2, Download } from 'lucide-react';
 import { generateAuditExport } from '../utils/exportUtils';
-import db from '../db/picketDb';
+import db from '../db/pimaDb';
 
-const PICKetOverlay = ({ isPainting, togglePainting, onUndo, onClear, handleFileUpload, ward, wardLabel, cycleWard }) => {
+const PIMAOverlay = ({ isPainting, togglePainting, onUndo, onClear, handleFileUpload, ward, wardLabel, cycleWard }) => {
   const handleExport = async () => {
     const strokes = await db.features.toArray();
     const visits = await db.visits.toArray();
@@ -73,4 +73,4 @@ const PICKetOverlay = ({ isPainting, togglePainting, onUndo, onClear, handleFile
   );
 };
 
-export default PICKetOverlay;
+export default PIMAOverlay;

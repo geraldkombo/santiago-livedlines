@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import db from '../db/picketDb';
+import db from '../db/pimaDb';
 import { MATERIAL_HEURISTICS } from '../utils/heuristicsEngine';
 import { BarChart3, MapPin, ShieldAlert, CheckCircle, AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
 

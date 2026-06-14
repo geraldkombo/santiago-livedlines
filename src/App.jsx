@@ -7,7 +7,7 @@ import { generateGeospatialData, calculateLVS } from './utils/spatialEngine';
 import { Recycle, BarChart3, Sliders } from 'lucide-react';
 import * as turf from '@turf/turf';
 import L from 'leaflet';
-import db from './db/picketDb';
+import db from './db/pimaDb';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -110,14 +110,14 @@ const App = () => {
           <div className="flex items-center gap-2">
             <Recycle className="w-8 h-8 text-emerald-400" />
             <h1 className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-amber-400">
-              PICKet
+              PIMA
             </h1>
           </div>
           <p className="text-xs text-slate-400 mt-2 font-medium">
             Waste Picker Spatial Organizing Toolkit
           </p>
           <p className="text-[10px] mt-1 italic text-slate-500">
-            Build your own data — counter the Ghana formula
+            PIMA na ujue — Measure and know
           </p>
         </div>
 
