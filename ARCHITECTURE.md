@@ -57,7 +57,7 @@ geoCache: 'url'                             // Fetch cache for remote GeoJSON
 
 ### Pica (Client-Side Image Compression)
 
-**Why:** Modern smartphone cameras capture 5–10 MB images. Storing dozens of raw images in IndexedDB would quickly exhaust browser storage quotas (especially on iOS, which enforces a 50 MB limit and 7-day PWA cache eviction).
+**Why:** Modern smartphone cameras capture 5-10 MB images. Storing dozens of raw images in IndexedDB would quickly exhaust browser storage quotas (especially on iOS, which enforces a 50 MB limit and 7-day PWA cache eviction).
 
 **How it works:**
 1. User captures photo via `<input type="file" accept="image/*" capture="environment">`

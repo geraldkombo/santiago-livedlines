@@ -151,7 +151,7 @@ The GeoJSON file contains:
 | Export GeoJSON | ✅ |
 | Upload custom data | ✅ |
 
-**Map tiles:** The app loads OpenStreetMap tiles when online. Your browser caches recently viewed tiles, so areas you've looked at will be available offline. For guaranteed offline tiles at a specific ward (e.g., Mathare), open the app while connected to Wi-Fi and pan around the ward at zoom levels 15–17 to cache tiles.
+**Map tiles:** The app loads OpenStreetMap tiles when online. Your browser caches recently viewed tiles, so areas you've looked at will be available offline. For guaranteed offline tiles at a specific ward (e.g., Mathare), open the app while connected to Wi-Fi and pan around the ward at zoom levels 15-17 to cache tiles.
 
 ---
 

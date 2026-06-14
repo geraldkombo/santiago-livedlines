@@ -156,7 +156,7 @@ Per the First Schedule of Kenya's **Sustainable Waste Management (EPR) Regulatio
 | 4 | End-of-life motor vehicles | Vehicles, tyres | (Future) |
 | 5 | Non-packaging items | Organic waste, textiles, other | ORGANIC |
 
-Currently, Waste Record defaults all material types to **Category 1** (non-hazardous packaging) since the initial target materials (plastics, paper, glass, metals, cardboard) fall under this category. Organic waste maps to Category 5. Future iterations will expand to include Categories 2–4.
+Currently, Waste Record defaults all material types to **Category 1** (non-hazardous packaging) since the initial target materials (plastics, paper, glass, metals, cardboard) fall under this category. Organic waste maps to Category 5. Future iterations will expand to include Categories 2-4.
 
 ---
 

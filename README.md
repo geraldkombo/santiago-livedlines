@@ -18,7 +18,7 @@ Offline-first collection logging app for waste picker cooperatives in Kenya. Log
 - **Collection logging** - log material type (8 categories), container (Cart/Sack), fullness, with live estimated kg
 - **Photo evidence** - native camera capture with pica client-side compression (~150 KB JPEG), stored in IndexedDB
 - **Hazard/incident tagging** - click to mark health incidents, harassment, unfair pricing directly on the map
-- **Collection Pricing tool** - adjust price per kg (KES 5–100) and see daily affected value per ward
+- **Collection Pricing tool** - adjust price per kg (KES 5-100) and see daily affected value per ward
 - **GPS geofence verification** - log site visits with high-accuracy GPS; records are timestamped and buffer-verified
 - **City Dashboard** - aggregated stats: total kg collected, material breakdown, hazard count, visit verification rate
 - **Canvas-rendered map** - Leaflet with `preferCanvas` for smooth 60fps at 10,000+ points on low-end devices
