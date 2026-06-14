@@ -2,9 +2,7 @@
 
 ## 1. Primary Source: Nairobi Waste Picker Organizing Chat
 
-**Source:** `WhatsApp Chat with Waste pickers working group...txt`
-
-This repository includes a real WhatsApp transcript from an active waste picker organizing group in Nairobi. It documents ongoing organizing around the Sustainable Waste Management Act implementation, EPR (Extended Producer Responsibility) pricing disputes, Dandora dumpsite politics, and the fight for formal recognition.
+This project is grounded in ongoing organizing around the Sustainable Waste Management Act implementation, EPR (Extended Producer Responsibility) pricing disputes, Dandora dumpsite politics, and the fight for formal recognition.
 
 ### Key Findings Extracted
 

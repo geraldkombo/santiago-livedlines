@@ -3,7 +3,7 @@
 Offline-first collection logging app for waste picker cooperatives in Kenya. Log materials, take photos, mark locations on a map, and export GPS-stamped evidence for EPR advocacy. No internet. No server. No cloud.
 
 > **Full documentation:**
-> - [Research Foundation](RESEARCH.md) — WhatsApp transcript analysis, global precedents, legal framework, density heuristics
+> - [Research Foundation](RESEARCH.md) — WhatsApp analysis, global precedents, legal framework, density heuristics
 > - [Architecture](ARCHITECTURE.md) — Zero-server design, IndexedDB, Canvas renderer, PWA decisions
 > - [EPR GeoJSON Schema](EPR-SCHEMA.md) — NEMA-aligned export schema, field reference, legal basis
 > - [Field Guide](FIELD-GUIDE.md) — Sheng glossary, collection workflows, offline usage, device requirements
@@ -115,7 +115,7 @@ git push origin master
 
 ## Context
 
-This toolkit was built alongside the Nairobi waste picker organizing movement. The WhatsApp transcript in this repository documents real organizing around EPR pricing disputes, county consolidation, Dandora evictions, and the fight for formal recognition.
+This toolkit was built alongside the Nairobi waste picker organizing movement.
 
 Key organizing pain points the toolkit addresses:
 - **Data gap** — NEMA uses a Ghana formula (41 kg/day) that doesn't fit Kenyan reality; pickers now collect their own site-level data
