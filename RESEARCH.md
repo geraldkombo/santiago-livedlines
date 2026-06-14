@@ -114,14 +114,14 @@ Waste Record directly addresses this gap by providing a standardized, offline, G
 
 | Material | Density (kg/m³) | 100L Gunia (kg) | 1.5m³ Mkokoteni (kg) |
 |----------|----------------|-----------------|----------------------|
-| PET Plastics (Chupa) | 21 | 2.1 | 31.5 |
-| HDPE Plastics (Chupa) | 14 | 1.4 | 21.0 |
-| Cardboard (Katoni) | 45 | 4.5 | 67.5 |
-| Mixed Paper (Karatasi) | 205 | 20.5 | 307.5 |
-| Aluminum Cans (Mkebe) | 35.5 | 3.6 | 53.3 |
-| Steel (Chuma) | 96.5 | 9.7 | 144.8 |
-| Glass (Chupa) | 355.5 | 35.6 | 533.3 |
-| Organic/Food (Chirambe) | 255 | 25.5 | 382.5 |
+| PET Plastics | 21 | 2.1 | 31.5 |
+| HDPE Plastics | 14 | 1.4 | 21.0 |
+| Cardboard | 45 | 4.5 | 67.5 |
+| Mixed Paper | 205 | 20.5 | 307.5 |
+| Aluminum Cans | 35.5 | 3.6 | 53.3 |
+| Steel | 96.5 | 9.7 | 144.8 |
+| Glass | 355.5 | 35.6 | 533.3 |
+| Organic/Food | 255 | 25.5 | 382.5 |
 
 **Methodology:** `estimatedWeight = containerVolume × fullnessPercentage × density`
 
