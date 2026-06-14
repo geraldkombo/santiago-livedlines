@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
-import * as turf from '@turf/turf';
 import { useTraumaBrush } from '../hooks/useTraumaBrush';
-import LivedTraumaOverlay from './LivedTraumaOverlay';
+import PICKetOverlay from './PICKetOverlay';
 
 const RecenterMap = ({ center }) => {
   const map = useMap();
@@ -13,13 +12,13 @@ const RecenterMap = ({ center }) => {
   return null;
 };
 
-const PaintTraumaBrush = ({ isPainting, addStroke }) => {
+const PaintBrush = ({ isPainting, addStroke }) => {
   useMapEvents({
     click(e) {
       if (!isPainting) return;
       const feature = {
         type: 'Feature',
-        properties: { timestamp: Date.now(), type: 'trauma_mark' },
+        properties: { timestamp: Date.now(), type: 'hazard_mark' },
         geometry: { type: 'Point', coordinates: [e.latlng.lng, e.latlng.lat] }
       };
       addStroke(feature);
@@ -28,18 +27,24 @@ const PaintTraumaBrush = ({ isPainting, addStroke }) => {
   return null;
 };
 
-const MapViewer = ({ spatialData, location, setLocation, handleFileUpload }) => {
+const MapViewer = ({ spatialData, ward, wardLabel, cycleWard, handleFileUpload }) => {
   const { strokes, isPainting, setIsPainting, addStroke, undoStroke, clearStrokes } = useTraumaBrush();
 
   if (!spatialData) {
     return (
       <div className="flex items-center justify-center h-full text-slate-400 text-sm">
-        Parsing Earth Observation Geometry...
+        Loading ward geospatial data...
       </div>
     );
   }
 
-  const mapCenter = location === 'mombasa' ? [-4.0530, 39.6728] : [-1.2490, 36.8962];
+  const wardCenters = {
+    mathare: [-1.2567, 36.8571],
+    dandora: [-1.2527, 36.8805],
+    kibera: [-1.3155, 36.7667],
+    kawangware: [-1.2745, 36.7196]
+  };
+  const mapCenter = wardCenters[ward] || wardCenters.mathare;
 
   const getBuildingStyle = (feature) => {
     const status = feature.properties.status;
@@ -59,14 +64,15 @@ const MapViewer = ({ spatialData, location, setLocation, handleFileUpload }) => 
 
   return (
     <div className="relative h-full w-full">
-      <LivedTraumaOverlay
+      <PICKetOverlay
         isPainting={isPainting}
         togglePainting={() => setIsPainting(!isPainting)}
         onUndo={undoStroke}
         onClear={clearStrokes}
         handleFileUpload={handleFileUpload}
-        location={location}
-        setLocation={setLocation}
+        ward={ward}
+        wardLabel={wardLabel}
+        cycleWard={cycleWard}
       />
 
       <MapContainer center={mapCenter} zoom={15} className="h-full w-full relative z-0" style={{ cursor: isPainting ? 'crosshair' : 'default' }}>
@@ -78,25 +84,25 @@ const MapViewer = ({ spatialData, location, setLocation, handleFileUpload }) => 
         <RecenterMap center={mapCenter} />
 
         <GeoJSON
-          key={`b60-${location}`}
+          key={`b60-${ward}`}
           data={spatialData.buffer60}
           style={{ color: '#fb923c', weight: 0, fillColor: '#fb923c', fillOpacity: 0.2 }}
         />
 
         <GeoJSON
-          key={`b30-${location}`}
+          key={`b30-${ward}`}
           data={spatialData.buffer30}
           style={{ color: '#f87171', weight: 0, fillColor: '#f87171', fillOpacity: 0.25 }}
         />
 
         <GeoJSON
-          key={`hwm-${location}`}
-          data={spatialData.hwmLine}
+          key={`ds-${ward}`}
+          data={spatialData.dumpsiteLine}
           style={{ color: '#0f172a', weight: 3, dashArray: '6, 6' }}
         />
 
         <GeoJSON
-          key={`build-${location}-${spatialData.buildings.features.length}`}
+          key={`build-${ward}-${spatialData.buildings.features.length}`}
           data={spatialData.buildings}
           style={getBuildingStyle}
         />
@@ -118,7 +124,7 @@ const MapViewer = ({ spatialData, location, setLocation, handleFileUpload }) => 
           />
         )}
 
-        <PaintTraumaBrush isPainting={isPainting} addStroke={addStroke} />
+        <PaintBrush isPainting={isPainting} addStroke={addStroke} />
       </MapContainer>
     </div>
   );

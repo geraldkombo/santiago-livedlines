@@ -3,8 +3,9 @@ export const generateAuditExport = (strokes, ledgerData) => {
     type: "FeatureCollection",
     metadata: {
       exportedAt: new Date().toISOString(),
-      source: "santiago-livedlines",
-      ledgerSummary: ledgerData
+      source: "picket",
+      toolkit: "Waste Picker Spatial Organizing Toolkit",
+      visitsLogged: Object.keys(ledgerData).length || (ledgerData.length || 0)
     },
     features: strokes.map(stroke => ({
       ...stroke,
@@ -22,7 +23,7 @@ export const generateAuditExport = (strokes, ledgerData) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `audit_export_${new Date().getTime()}.geojson`;
+  a.download = `epr-evidence-${new Date().getTime()}.geojson`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

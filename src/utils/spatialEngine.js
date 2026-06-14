@@ -29,55 +29,73 @@ export const calculateLVS = (fri, lhi, gsc, wf = 0.4, wh = 0.4, wg = 0.2) => {
   return (wf * fri) + (wh * lhi) - (wg * gsc);
 };
 
-export const generateGeospatialData = (location) => {
-  const isMombasa = location === 'mombasa';
-  const hwmCoords = isMombasa
-    ? [[39.6600, -4.0480], [39.6650, -4.0500], [39.6700, -4.0520], [39.6728, -4.0530], [39.6780, -4.0550]]
-    : [[36.8920, -1.2470], [36.8940, -1.2485], [36.8962, -1.2490], [36.8980, -1.2495], [36.9020, -1.2512]];
+export const generateGeospatialData = (ward) => {
+  const wardConfig = {
+    mathare: {
+      center: [-1.2567, 36.8571],
+      boundaryCoords: [[36.8520, -1.2530], [36.8550, -1.2555], [36.8571, -1.2567], [36.8600, -1.2575], [36.8630, -1.2590]],
+      label: 'Mathare Valley Dumpsite Boundary'
+    },
+    dandora: {
+      center: [-1.2527, 36.8805],
+      boundaryCoords: [[36.8755, -1.2490], [36.8780, -1.2510], [36.8805, -1.2527], [36.8830, -1.2540], [36.8860, -1.2560]],
+      label: 'Dandora Dumpsite Boundary'
+    },
+    kibera: {
+      center: [-1.3155, 36.7667],
+      boundaryCoords: [[36.7610, -1.3120], [36.7640, -1.3140], [36.7667, -1.3155], [36.7690, -1.3170], [36.7720, -1.3190]],
+      label: 'Kibera Dumpsite Boundary'
+    },
+    kawangware: {
+      center: [-1.2745, 36.7196],
+      boundaryCoords: [[36.7140, -1.2710], [36.7170, -1.2730], [36.7196, -1.2745], [36.7220, -1.2760], [36.7250, -1.2780]],
+      label: 'Kawangware Dumpsite Boundary'
+    }
+  };
 
-  const hwmLine = turf.lineString(hwmCoords, { name: isMombasa ? 'Tudor Creek HWM' : 'Mathare River HWM' });
-  const buffer30 = turf.buffer(hwmLine, 0.03, { units: 'kilometers' });
-  const buffer60 = turf.buffer(hwmLine, 0.06, { units: 'kilometers' });
+  const config = wardConfig[ward] || wardConfig.mathare;
+  const [centerLat, centerLng] = config.center;
 
-  const buildings = [];
-  const centerLng = isMombasa ? 39.6700 : 36.8962;
-  const centerLat = isMombasa ? -4.0530 : -1.2490;
+  const dumpsiteLine = turf.lineString(config.boundaryCoords, { name: config.label });
+  const buffer30 = turf.buffer(dumpsiteLine, 0.03, { units: 'kilometers' });
+  const buffer60 = turf.buffer(dumpsiteLine, 0.06, { units: 'kilometers' });
 
+  const points = [];
   for (let i = 0; i < 50; i++) {
     const lng = centerLng + (Math.random() - 0.5) * 0.015;
     const lat = centerLat + (Math.random() - 0.5) * 0.008;
     const pt = turf.point([lng, lat]);
 
     const radius = 0.002 + (Math.random() * 0.003);
-    const buildingPoly = turf.buffer(pt, radius, { units: 'kilometers' });
+    const pointPoly = turf.buffer(pt, radius, { units: 'kilometers' });
 
     const height = 3 + Math.random() * 12;
-    const area = turf.area(buildingPoly);
+    const area = turf.area(pointPoly);
     const volume = calculateVolume(area, height);
-
-    const s = 40 + Math.random() * 110;
-    const runoff = calculateRunoff(112, s);
 
     const lhi = Math.random() * 10;
     const gsc = Math.random() * 4;
 
-    const distToRiver = turf.pointToLineDistance(pt, hwmLine, { units: 'kilometers' }) * 1000;
+    const distToDumpsite = turf.pointToLineDistance(pt, dumpsiteLine, { units: 'kilometers' }) * 1000;
 
     let fri = 1;
-    if (distToRiver <= 30) fri = 10;
-    else if (distToRiver <= 60) fri = 5;
+    if (distToDumpsite <= 30) fri = 10;
+    else if (distToDumpsite <= 60) fri = 5;
 
     const lvs = calculateLVS(fri, lhi, gsc);
 
     let status = 'Safe';
-    if (turf.booleanIntersects(buildingPoly, buffer30)) {
+    if (turf.booleanIntersects(pointPoly, buffer30)) {
       status = 'Zone 1';
-    } else if (turf.booleanIntersects(buildingPoly, buffer60)) {
+    } else if (turf.booleanIntersects(pointPoly, buffer60)) {
       status = 'Zone 2';
     }
 
-    buildingPoly.properties = {
-      id: `STRUC-${1000 + i}`,
+    const s = 40 + Math.random() * 110;
+    const runoff = calculateRunoff(112, s);
+
+    pointPoly.properties = {
+      id: `COL-${1000 + i}`,
       height,
       area,
       volume,
@@ -86,15 +104,16 @@ export const generateGeospatialData = (location) => {
       gsc,
       lvs,
       status,
-      distToRiver
+      distToDumpsite,
+      dailyValue: volume * 41
     };
-    buildings.push(buildingPoly);
+    points.push(pointPoly);
   }
 
   return {
-    hwmLine,
+    dumpsiteLine,
     buffer30,
     buffer60,
-    buildings: turf.featureCollection(buildings)
+    buildings: turf.featureCollection(points)
   };
 };

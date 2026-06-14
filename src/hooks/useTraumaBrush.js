@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { saveToLedger, getFromLedger } from '../components/LocalLedger';
 
 export const useTraumaBrush = () => {
-  const [strokes, setStrokes] = useState(() => getFromLedger('trauma_strokes') || []);
+  const [strokes, setStrokes] = useState(() => getFromLedger('picket_hazards') || []);
   const [isPainting, setIsPainting] = useState(false);
 
   useEffect(() => {
-    saveToLedger('trauma_strokes', strokes);
+    saveToLedger('picket_hazards', strokes);
   }, [strokes]);
 
   const addStroke = (geoJson) => setStrokes(prev => [...prev, geoJson]);

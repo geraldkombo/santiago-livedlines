@@ -17,7 +17,7 @@ echo "Building Production Bundle..."
 npm run build
 
 if [ $? -eq 0 ]; then
-    echo "SUCCESS: Project Santiago-Livedlines is ready."
+    echo "SUCCESS: PICKet — Waste Picker Spatial Organizing Toolkit is ready."
     exit 0
 else
     echo "Build Failed. Check dist/ logs."

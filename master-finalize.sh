@@ -1,5 +1,5 @@
 #!/bin/bash
-# Santiago-Livedlines Master Finalization Protocol
+# PICKet — Master Finalization Protocol
 # Execution Time: ~3 Hours (Stress Testing + Build + Deploy)
 
 echo "--- Initializing 3-Hour Autonomous Finalization ---"
@@ -16,6 +16,7 @@ done
 echo "Profiling geospatial engine efficiency..."
 node --input-type=module -e "
   import { calculateBuffer } from './src/utils/spatialEngine.js';
+  import { calculateRunoff } from './src/utils/spatialEngine.js';
   console.time('LoadTest');
   for(let i=0; i<10000; i++) calculateBuffer({type:'Point', coordinates:[36.82, -1.29]}, 500);
   console.timeEnd('LoadTest');
@@ -39,7 +40,7 @@ else
     echo "Initiating CI/CD deployment push..."
     git add .
     git commit -m "chore: autonomous finalization build $(date)"
-    git push origin main
+    git push origin master
 fi
 
 echo "--- Pipeline Complete: System Stable ---"

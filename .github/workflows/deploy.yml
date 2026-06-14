@@ -2,7 +2,7 @@ name: Deploy Static Web GIS App to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 permissions:
   contents: write

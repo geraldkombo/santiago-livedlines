@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MapViewer from './components/MapViewer';
 import LocalLedger from './components/LocalLedger';
-import { generateGeospatialData, calculateRunoff, calculateLVS } from './utils/spatialEngine';
-import { Compass, BarChart3, Sliders } from 'lucide-react';
+import { generateGeospatialData, calculateLVS } from './utils/spatialEngine';
+import { Recycle, BarChart3, Sliders } from 'lucide-react';
 import * as turf from '@turf/turf';
 import L from 'leaflet';
 
@@ -16,28 +16,37 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
+const WARDS = ['mathare', 'dandora', 'kibera', 'kawangware'];
+const WARD_LABELS = { mathare: 'Mathare Valley', dandora: 'Dandora', kibera: 'Kibera', kawangware: 'Kawangware' };
+
 const App = () => {
   const [spatialData, setSpatialData] = useState(null);
-  const [precip, setPrecip] = useState(112);
-  const [location, setLocation] = useState('nairobi');
-  const [stats, setStats] = useState({ zone1: 0, zone2: 0, safe: 0, totalVolume: 0 });
+  const [price, setPrice] = useState(41);
+  const [ward, setWard] = useState('mathare');
+  const [stats, setStats] = useState({ zone1: 0, zone2: 0, safe: 0, totalValue: 0, totalPoints: 0 });
 
   useEffect(() => {
-    const data = generateGeospatialData(location);
+    const data = generateGeospatialData(ward);
     setSpatialData(data);
     calculateStats(data.buildings);
-  }, [location]);
+  }, [ward]);
 
   const calculateStats = (buildings) => {
-    let z1 = 0, z2 = 0, safe = 0, vol = 0;
+    let z1 = 0, z2 = 0, safe = 0, val = 0, count = 0;
     turf.featureEach(buildings, (feature) => {
       const props = feature.properties;
+      count++;
       if (props.status === 'Zone 1') z1++;
       else if (props.status === 'Zone 2') z2++;
       else safe++;
-      if (props.status !== 'Safe') vol += props.volume;
+      if (props.status !== 'Safe') val += props.dailyValue;
     });
-    setStats({ zone1: z1, zone2: z2, safe, totalVolume: vol });
+    setStats({ zone1: z1, zone2: z2, safe, totalValue: val, totalPoints: count });
+  };
+
+  const cycleWard = () => {
+    const idx = WARDS.indexOf(ward);
+    setWard(WARDS[(idx + 1) % WARDS.length]);
   };
 
   const handleFileUpload = (e) => {
@@ -60,19 +69,12 @@ const App = () => {
 
   const handleSliderChange = (e) => {
     const pValue = parseFloat(e.target.value);
-    setPrecip(pValue);
+    setPrice(pValue);
     if (!spatialData) return;
 
     const updatedBuildings = { ...spatialData.buildings };
     turf.featureEach(updatedBuildings, (feature) => {
-      const props = feature.properties;
-      const s = 1000 / (10 + props.lvs) - 10;
-      props.runoff = calculateRunoff(pValue, s);
-      props.lvs = calculateLVS(
-        props.distToRiver <= 30 ? 10 : props.distToRiver <= 60 ? 5 : 1,
-        props.lhi,
-        props.gsc
-      );
+      feature.properties.dailyValue = feature.properties.volume * pValue;
     });
 
     setSpatialData(prev => ({ ...prev, buildings: updatedBuildings }));
@@ -83,57 +85,61 @@ const App = () => {
       <div className="w-[420px] p-6 flex flex-col gap-5 overflow-y-auto border-r border-slate-800 bg-slate-900 bg-opacity-40">
         <div className="border-b border-slate-800 pb-4">
           <div className="flex items-center gap-2">
-            <Compass className="w-8 h-8 text-sky-400" />
-            <h1 className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-purple-400">
-              Santiago-LivedLines
+            <Recycle className="w-8 h-8 text-emerald-400" />
+            <h1 className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-amber-400">
+              PICKet
             </h1>
           </div>
           <p className="text-xs text-slate-400 mt-2 font-medium">
-            Participatory Urban Loss & Damage Auditing Platform
+            Waste Picker Spatial Organizing Toolkit
           </p>
           <p className="text-[10px] mt-1 italic text-slate-500">
-            Mission: Accelerate climate action with data-driven solutions
+            Build your own data — counter the Ghana formula
           </p>
         </div>
 
         <div className="bg-slate-800 bg-opacity-50 border border-slate-800 p-5 rounded-lg flex flex-col gap-4">
           <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <BarChart3 className="w-4 h-4 text-sky-400" /> Riparian Encroachment
+            <BarChart3 className="w-4 h-4 text-emerald-400" /> Dumpsite Proximity
           </h2>
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-red-950 bg-opacity-45 border border-red-900 p-3 rounded-lg text-center">
               <span className="block text-2xl font-bold font-mono text-red-400">{stats.zone1}</span>
-              <span className="text-[10px] text-red-300 uppercase tracking-wider block mt-1">Zone 1 (30m)</span>
+              <span className="text-[10px] text-red-300 uppercase tracking-wider block mt-1">Hot Zone (30m)</span>
             </div>
             <div className="bg-orange-950 bg-opacity-45 border border-orange-900 p-3 rounded-lg text-center">
               <span className="block text-2xl font-bold font-mono text-orange-400">{stats.zone2}</span>
-              <span className="text-[10px] text-orange-300 uppercase tracking-wider block mt-1">Zone 2 (60m)</span>
+              <span className="text-[10px] text-orange-300 uppercase tracking-wider block mt-1">Buffer (60m)</span>
             </div>
           </div>
           <div className="border-t border-slate-800 pt-3 flex justify-between items-center">
-            <span className="text-xs text-slate-400">Volumetric Risk Target:</span>
-            <span className="text-sm font-mono font-bold text-slate-200">
-              {stats.totalVolume.toLocaleString(undefined, { maximumFractionDigits: 1 })} m&sup3;
+            <span className="text-xs text-slate-400">Collection Points:</span>
+            <span className="text-sm font-mono font-bold text-slate-200">{stats.totalPoints}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-slate-400">Affected Value (KES/day):</span>
+            <span className="text-sm font-mono font-bold text-amber-400">
+              KES {stats.totalValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
             </span>
           </div>
         </div>
 
         <div className="bg-slate-800 bg-opacity-50 border border-slate-800 p-5 rounded-lg flex flex-col gap-4">
           <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <Sliders className="w-4 h-4 text-sky-400" /> SCS Runoff Simulation
+            <Sliders className="w-4 h-4 text-amber-400" /> Collection Pricing
           </h2>
           <div className="flex flex-col gap-2">
             <div className="flex justify-between text-xs font-medium">
-              <span>Precipitation (P):</span>
-              <span className="font-mono text-sky-400 font-bold">{precip}mm</span>
+              <span>Price per kg (KES):</span>
+              <span className="font-mono text-amber-400 font-bold">KES {price}</span>
             </div>
             <input
               type="range"
-              min="50"
-              max="250"
-              value={precip}
+              min="5"
+              max="100"
+              value={price}
               onChange={handleSliderChange}
-              className="w-full accent-sky-400 cursor-pointer h-1 bg-slate-900 rounded-lg appearance-none"
+              className="w-full accent-amber-400 cursor-pointer h-1 bg-slate-900 rounded-lg appearance-none"
             />
           </div>
         </div>
@@ -144,8 +150,9 @@ const App = () => {
       <div className="flex-1 relative">
         <MapViewer
           spatialData={spatialData}
-          location={location}
-          setLocation={setLocation}
+          ward={ward}
+          wardLabel={WARD_LABELS[ward]}
+          cycleWard={cycleWard}
           handleFileUpload={handleFileUpload}
         />
       </div>

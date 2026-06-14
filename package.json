@@ -1,11 +1,13 @@
 {
-  "name": "santiago-livedlines",
+  "name": "picket",
   "version": "1.0.0",
+  "description": "PICKet — Offline-first waste picker spatial organizing toolkit for participatory EPR advocacy, hazard mapping, and GeoJSON evidence export.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "dependencies": {
     "@turf/turf": "^6.5.0",
