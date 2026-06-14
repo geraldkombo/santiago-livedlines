@@ -1,3 +1,23 @@
+function sortKeys(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) return obj.map(sortKeys);
+  return Object.keys(obj).sort().reduce((acc, k) => {
+    acc[k] = sortKeys(obj[k]);
+    return acc;
+  }, {});
+}
+
+async function sha256Hex(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  const bytes = new Uint8Array(hash);
+  let hex = '';
+  for (let i = 0; i < bytes.length; i++) {
+    hex += bytes[i].toString(16).padStart(2, '0');
+  }
+  return hex;
+}
+
 const EPR_CATEGORIES = {
   1: 'Category 1: Non-hazardous packaging (plastics, paper, glass, aluminum)',
   2: 'Category 2: Hazardous products packaging',
@@ -6,7 +26,7 @@ const EPR_CATEGORIES = {
   5: 'Category 5: Non-packaging items'
 };
 
-export const generateAuditExport = (strokes, visits) => {
+export const generateAuditExport = async (strokes, visits) => {
   const features = strokes.map(s => ({
     type: 'Feature',
     geometry: s.geometry,
@@ -55,6 +75,11 @@ export const generateAuditExport = (strokes, visits) => {
     features: [...features, ...visitPoints]
   };
 
+  const sorted = sortKeys(featureCollection);
+  const json = JSON.stringify(sorted, null, 2);
+  const hash = await sha256Hex(json);
+
+  featureCollection._integrity = 'sha256-' + hash;
   const blob = new Blob([JSON.stringify(featureCollection, null, 2)], {
     type: 'application/geo+json'
   });

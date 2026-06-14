@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { MATERIAL_HEURISTICS, CONTAINER_VOLUMES, estimateWeight } from '../utils/heuristicsEngine';
 import { Scale, MapPin, Crosshair, Camera, Trash2 } from 'lucide-react';
 import Pica from 'pica';
+import { stampPhoto } from '../utils/watermark';
 
 const MAX_IMAGE_DIM = 800;
 const JPEG_QUALITY = 0.6;
@@ -73,8 +74,13 @@ const CollectionForm = ({ placing, onPlaceRequest, pendingCoords, onSave }) => {
     setPhotoPreview(null);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!pendingCoords) return;
+    const now = Date.now();
+    let finalBlob = photoBlob;
+    if (finalBlob) {
+      finalBlob = await stampPhoto(finalBlob, now, pendingCoords.lat, pendingCoords.lng);
+    }
     onSave({
       type: 'Feature',
       geometry: {
@@ -82,7 +88,7 @@ const CollectionForm = ({ placing, onPlaceRequest, pendingCoords, onSave }) => {
         coordinates: [pendingCoords.lng, pendingCoords.lat]
       },
       properties: {
-        timestamp: Date.now(),
+        timestamp: now,
         type: 'collection_log',
         ward: '',
         materialType: material,
@@ -91,7 +97,7 @@ const CollectionForm = ({ placing, onPlaceRequest, pendingCoords, onSave }) => {
         estimatedWeight: estimatedKg,
         eprCategory: MATERIAL_HEURISTICS[material].eprCategory
       }
-    }, photoBlob);
+    }, finalBlob);
   };
 
   return (

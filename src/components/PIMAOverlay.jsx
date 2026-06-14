@@ -7,7 +7,7 @@ const PIMAOverlay = ({ isPainting, togglePainting, onUndo, onClear, handleFileUp
   const handleExport = async () => {
     const strokes = await db.features.toArray();
     const visits = await db.visits.toArray();
-    generateAuditExport(strokes, visits);
+    await generateAuditExport(strokes, visits);
   };
 
   return (
