@@ -4,6 +4,13 @@
 
 Built by waste pickers, for waste pickers — to replace "they say" with data.
 
+> **Full documentation:**
+> - [Research Foundation](RESEARCH.md) — WhatsApp transcript analysis, global precedents, legal framework, density heuristics
+> - [Architecture](ARCHITECTURE.md) — Zero-server design, IndexedDB, Canvas renderer, PWA decisions
+> - [EPR GeoJSON Schema](EPR-SCHEMA.md) — NEMA-aligned export schema, field reference, legal basis
+> - [Field Guide](FIELD-GUIDE.md) — Sheng glossary, collection workflows, offline usage, device requirements
+> - [Team](TEAM.md) — Team bios, roles, domain expertise, contact
+
 ## Features
 
 - **Offline-first PWA** — installable on home screen; works without internet after first load
